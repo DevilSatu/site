@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профили подготовки - Колледж Цифровых Технологий</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: #1a1a1a;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-section img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            color: #cccccc;
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        .phone {
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+        .main-container {
+            display: flex;
+            gap: 40px;
+            padding: 40px;
+            min-height: calc(100vh - 90px);
+        }
+
+        .profiles-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 800px;
+        }
+
+        .profile-card {
+            background-color: #1a1a1a;
+            border: 2px solid #7b1fa2;
+            border-radius: 8px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid #7b1fa2;
+            border-radius: 8px;
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+
+        .profile-card.active::before {
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            animation: borderPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes borderPulse {
+            0%, 100% {
+                border-color: #00ff00;
+                box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            }
+            50% {
+                border-color: #00cc00;
+                box-shadow: 0 0 30px rgba(0, 255, 0, 0.7);
+            }
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .profile-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .description-panel {
+            background-color: #1a1a1a;
+            border: 2px solid #7b1fa2;
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 600px;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            width: 100%;
+        }
+
+        .description-panel.active {
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            animation: borderPulse 2s ease-in-out infinite;
+        }
+
+        .description-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .description-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #ffffff;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .profiles-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                max-width: 100%;
+            }
+
+            .description-panel {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profiles-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, auto);
+            }
+
+            .header {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-section">
+            <a href="index.html"><img src="pngs/first/Иконка.png" alt="Логотип Колледжа Цифровых Технологий"></a>
+            <div class="logo-text">
+                <h1>Колледж Цифровых Технологий</h1>
+                <p>Образование будущего</p>
+            </div>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="profiles.html" id="profilesLink">Профили подготовки</a></li>
+                <li><a href="#info">Информация</a></li>
+                <li><a href="#my-kct">Мой КЦТ</a></li>
+            </ul>
+        </nav>
+        <div class="phone">+7-343-286-7859</div>
+    </header>
+
+    <main class="main-container">
+        <div class="profiles-grid">
+            <a href="#frontend" class="profile-card" data-profile="frontend">
+                <img src="pngs/Profiles/FrontEND.png" alt="FrontEnd" class="profile-icon">
+            </a>
+            <a href="#backend" class="profile-card" data-profile="backend">
+                <img src="pngs/Profiles/BackEnd.png" alt="BackEnd" class="profile-icon">
+            </a>
+            <a href="#gamedev" class="profile-card" data-profile="gamedev">
+                <img src="pngs/Profiles/Gamedev.png" alt="GameDev" class="profile-icon">
+            </a>
+            <a href="#design" class="profile-card" data-profile="design">
+                <img src="pngs/Profiles/Design.png" alt="Design" class="profile-icon">
+            </a>
+            <a href="#sysadmin" class="profile-card" data-profile="sysadmin">
+                <img src="pngs/Profiles/SysAdmin.png" alt="SysAdmin" class="profile-icon">
+            </a>
+            <a href="#projectmanager" class="profile-card" data-profile="projectmanager">
+                <img src="pngs/Profiles/Project Manager.png" alt="ProjectManager" class="profile-icon">
+            </a>
+        </div>
+
+        <div class="description-panel" id="descriptionPanel">
+            <h2 class="description-title" id="descriptionTitle">Выберите профиль</h2>
+            <p class="description-text" id="descriptionText">Нажмите на карточку профиля, чтобы узнать больше</p>
+        </div>
+    </main>
+
+    <script>
+        const profiles = {
+            frontend: {
+                title: 'FrontEnd',
+                text: 'FrontEnd разработчик - специалист, отвечающий за пользовательский интерфейс приложения. Он создаёт и делает удобной его видимую часть, например, выпадающее меню, всплывающие окна, навигацию, анимацию, корзины в маркетплейсах или лайки в соцсетях. А ещё следит, чтобы интерфейс адаптировался под разные гаджеты и всегда выглядел симпатично, при этом Frontend разработчику необходимо прописывать логику обработки действий пользователя: нажатия на клавиши, щелчки мыши, ввод данных. Нужно ли говорить о том, что пользователи часто ошибаются и действуют нелогично.'
+            },
+            backend: {
+                title: 'BackEnd',
+                text: 'BackEnd разработчик - специалист, который отвечает за серверную часть приложения. Он создаёт и поддерживает логику работы сайта, приложения или сервиса, обеспечивает работу баз данных, API и серверных процессов. Backend разработчик работает с серверами, базами данных, архитектурой приложений и обеспечивает безопасность данных.'
+            },
+            gamedev: {
+                title: 'GameDev',
+                text: 'GameDev разработчик - специалист по созданию компьютерных игр. Он разрабатывает игровую механику, программирует игровые движки, создаёт графику и анимацию, работает со звуком и музыкой. GameDev разработчик должен понимать игровой дизайн, физику, математику и уметь создавать увлекательные игровые миры.'
+            },
+            design: {
+                title: 'Design',
+                text: 'Дизайнер - специалист, который создаёт визуальную концепцию продукта, разрабатывает пользовательский интерфейс и пользовательский опыт. Он работает с цветом, типографикой, композицией, создаёт макеты и прототипы, следит за трендами в дизайне и обеспечивает эстетическую привлекательность продукта.'
+            },
+            sysadmin: {
+                title: 'SysAdmin',
+                text: 'Системный администратор - специалист, который обеспечивает стабильную работу IT-инфраструктуры компании. Он настраивает и поддерживает серверы, сети, операционные системы, обеспечивает безопасность данных, решает технические проблемы и оптимизирует работу IT-систем.'
+            },
+            projectmanager: {
+                title: 'ProjectManager',
+                text: 'Проектный менеджер - специалист, который управляет IT-проектами от начала до завершения. Он планирует задачи, распределяет ресурсы, контролирует сроки и бюджет, координирует работу команды, общается с заказчиками и обеспечивает успешную реализацию проекта.'
+            }
+        };
+
+        function selectProfile(profileKey) {
+            // Убираем активный класс со всех карточек
+            document.querySelectorAll('.profile-card').forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // Добавляем активный класс к выбранной карточке
+            const selectedCard = document.querySelector(`[data-profile="${profileKey}"]`);
+            if (selectedCard) {
+                selectedCard.classList.add('active');
+            }
+
+            // Обновляем панель описания
+            const panel = document.getElementById('descriptionPanel');
+            const title = document.getElementById('descriptionTitle');
+            const text = document.getElementById('descriptionText');
+            const profile = profiles[profileKey];
+
+            title.textContent = profile.title;
+            text.textContent = profile.text;
+
+            // Добавляем активный класс к панели
+            panel.classList.add('active');
+            
+            // Обновляем URL без перезагрузки страницы
+            history.pushState(null, null, `#${profileKey}`);
+            
+            // Обновляем заголовок страницы
+            document.title = `${profile.title} - Колледж Цифровых Технологий`;
+            
+            // Подсвечиваем ссылку в навигации
+            document.getElementById('profilesLink').style.color = '#00ff00';
+        }
+
+        // Обработчик нажатия на карточки
+        document.querySelectorAll('.profile-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                const profileKey = this.getAttribute('data-profile');
+                selectProfile(profileKey);
+            });
+        });
+
+        // Обработчик загрузки страницы и изменения hash в URL
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1); // Убираем символ #
+            
+            if (profiles[hash]) {
+                selectProfile(hash);
+            } else {
+                // Если нет hash или профиль не найден, показываем начальное состояние
+                document.querySelectorAll('.profile-card').forEach(card => {
+                    card.classList.remove('active');
+                });
+                document.getElementById('descriptionPanel').classList.remove('active');
+                document.getElementById('descriptionTitle').textContent = 'Выберите профиль';
+                document.getElementById('descriptionText').textContent = 'Нажмите на карточку профиля, чтобы узнать больше';
+                document.title = 'Профили подготовки - Колледж Цифровых Технологий';
+            }
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', handleHashChange);
+        
+        // Обработчик изменения hash в URL
+        window.addEventListener('hashchange', handleHashChange);
+    </script>
+</body>
+</html>
